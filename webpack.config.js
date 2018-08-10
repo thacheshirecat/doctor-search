@@ -17,7 +17,7 @@ module.exports = {
     new UglifyJsPlugin({ sourceMap: true}),
     new Dotenv(),
     new HtmlWebpackPlugin({
-      title: 'Journal',
+      title: 'DoctorSearch',
       template: './src/index.html',
       inject: 'body'
     })

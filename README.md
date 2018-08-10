@@ -12,7 +12,6 @@ This program was created using the BetterDoctor API as a way to search for a doc
 * Navigate to project folder doctor-search in the terminal and execute "npm install"
 * After install completes execute "./node_modules/.bin/jasmine init"
 * execute "karma init"
-* execute "npm test" and view in either the console or the browser the result of the tests.
 * execute "npm run start" and the program will open in your browser
 
 ## Specs
@@ -25,4 +24,4 @@ This program was created using the BetterDoctor API as a way to search for a doc
 
 ### License
 
-*This software is license under MIT license.*
+*MIT license.*

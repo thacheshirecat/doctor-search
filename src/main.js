@@ -27,6 +27,7 @@ $(document).ready(function()
   {
     event.preventDefault();
 
+    $("#search-results").text("");
     $("#search-results").show();
 
     let name = $("#doctor-input").val();
@@ -36,17 +37,28 @@ $(document).ready(function()
     promise.then(function(response)
     {
       let doctors = JSON.parse(response);
-      doctors.data.forEach(function(doctor)
+
+      if(doctors.data[0] === undefined)
       {
-        $("#search-results").append(`___
-          <ul>
-          <li>Name: ${doctor.profile.first_name} ${doctor.profile.last_name}</li>
-          <li>Address: <p>${doctor.practices[0].visit_address.street}</p>
-          <p>${doctor.practices[0].visit_address.city}, ${doctor.practices[0].visit_address.state} ${doctor.practices[0].visit_address.zip}</p></li>
-        <li>Phone Number: ${doctor.practices[0].phones[0].number}</li>
-        <li>Website: ${doctor.practices[0].website}</li>
-        <li>Doctor accepting new patients? ${doctor.practices[0].accepts_new_patients}</li>`)
-      });
+        $("#search-results").append("No results found");
+      }
+      else
+      {
+        doctors.data.forEach(function(doctor)
+        {
+          $("#search-results").append(`<p>___</p>
+            <img src="${doctor.profile.image_url}">
+            <ul>
+            <li>Name: ${doctor.profile.first_name} ${doctor.profile.last_name}</li>
+            <li>Specialty: ${doctor.specialties[0].name}</li>
+            <li>Address: <p>${doctor.practices[0].visit_address.street}</p>
+            <p>${doctor.practices[0].visit_address.city}, ${doctor.practices[0].visit_address.state} ${doctor.practices[0].visit_address.zip}</p></li>
+          <li>Phone Number: ${doctor.practices[0].phones[0].number}</li>
+          <li>Website: ${doctor.practices[0].website}</li>
+          <li>Doctor accepting new patients? ${doctor.practices[0].accepts_new_patients}</li>
+          </ul><p>${doctor.profile.bio}`)
+        });
+      }
     },
     function(error)
     {
@@ -58,6 +70,7 @@ $(document).ready(function()
   {
     event.preventDefault();
 
+    $("#search-results").text("");
     $("#search-results").show();
 
     let symptom = $("#symptom-input").val();
@@ -67,17 +80,29 @@ $(document).ready(function()
     promise.then(function(response)
     {
       let symptom = JSON.parse(response);
-      symptom.data.forEach(function(doctor)
+
+      if(symptom.data[0] === undefined)
       {
-        $("#search-results").append(`___
-          <ul>
-          <li>Name: ${doctor.profile.first_name} ${doctor.profile.last_name}</li>
-          <li>Address: <p>${doctor.practices[0].visit_address.street}</p>
-          <p>${doctor.practices[0].visit_address.city}, ${doctor.practices[0].visit_address.state} ${doctor.practices[0].visit_address.zip}</p></li>
-        <li>Phone Number: ${doctor.practices[0].phones[0].number}</li>
-        <li>Website: ${doctor.practices[0].website}</li>
-        <li>Doctor accepting new patients? ${doctor.practices[0].accepts_new_patients}</li>`)
-      });
+        $("#search-results").append("No results found");
+      }
+      else
+      {
+        symptom.data.forEach(function(doctor)
+        {
+          $("#search-results").append(`<p>___</p>
+            <img src="${doctor.profile.image_url}">
+            <ul>
+            <li>Name: ${doctor.profile.first_name} ${doctor.profile.last_name}</li>
+            <li>Specialty: ${doctor.specialties[0].name}</li>
+            <li>Address: <p>${doctor.practices[0].visit_address.street}</p>
+            <p>${doctor.practices[0].visit_address.city}, ${doctor.practices[0].visit_address.state} ${doctor.practices[0].visit_address.zip}</p></li>
+          <li>Phone Number: ${doctor.practices[0].phones[0].number}</li>
+          <li>Website: ${doctor.practices[0].website}</li>
+          <li>Doctor accepting new patients? ${doctor.practices[0].accepts_new_patients}</li>
+          </ul><p>${doctor.profile.bio}`)
+        });
+      }
+
     }, function(error)
     {
       $('#error-field').text(`There was an error, message reads: ${error.message}`);

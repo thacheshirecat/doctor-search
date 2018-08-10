@@ -9,10 +9,11 @@
     "limit": 10
   },
 
-
+  //Data is the main set of this API pull, this is an array that contains several sub catagories
   "data": [
-
+    //This marks the start of the first array within data
     {
+      //Sub catagory practices is an array that also contains several sub catagories but only one index position [0]
       "practices":
       [
         {
@@ -23,6 +24,7 @@
           "uid": "d003a84e7c442133cb32bbc1f71e34d1",
           "name": "The Polyclinic",
           "accepts_new_patients": true,
+          //An array insurance_uids within practices
           "insurance_uids":
           [
             "bridgespan-bridgespanhix",
@@ -31,7 +33,7 @@
             "medicare-medicare",
             "aetna-aetnamdbronzesilverandgoldhmo"
           ],
-
+          //visit-address is yet another sub catagory within practices. The items within would be accessed using practices[0].visit_address.[key]
           "visit_address":
           {
             "city": "Seattle",
@@ -43,9 +45,9 @@
             "street2": "Ste 1660",
             "zip": "98104"
           },
-
+          //another array
           "office_hours": [],
-
+          //Yet another array, this one with sub catagories within each array possition
           "phones":
           [
             {
@@ -57,7 +59,7 @@
               "type": "landline"
             }
           ],
-
+          //Another array with sub catagories within each array possition
           "languages":
           [
             {
@@ -67,9 +69,9 @@
           ]
         }
       ],
-
+      //End of the practices array, start of the empty educations array
       "educations": [],
-
+      //Start of the Profile sub catagory
       "profile":
       {
         "first_name": "Frank",
@@ -79,86 +81,114 @@
         "title": "MD",
         "image_url": "https://asset3.betterdoctor.com/assets/general_doctor_male.png",
         "gender": "male",
-        "languages": [
+        //Another array with sub catagories within each array possition
+        "languages":
+        [
           {
             "name": "English",
             "code": "en"
           }
         ],
-
         "bio": "Dr. Frank Isik, MD treats patients in Seattle, Washington and specializes in plastic surgery.\n\nDr. Isik is licensed to practice medicine at Washington.\n\nIn addition to having active medical licenses, Dr. Isik has successfully passed a background check including a medical license verification (active) and screening for malpractice history (none found)."
       },
-
+      //End of the Profile sub catagory, start of empty array ratings
       "ratings": [],
-
-      "insurances": [
+      //Array sub catagory with multiple possitions
+      "insurances":
+      [
+        //[0]
         {
-          "insurance_plan": {
+          "insurance_plan":
+          {
             "uid": "bridgespan-bridgespanhix",
             "name": "Bridgespan - HIX",
-            "category": [
+            "category":
+            [
               "medical"
             ]
           },
-          "insurance_provider": {
+          "insurance_provider":
+          {
             "uid": "bridgespan",
             "name": "Cambia Health Solutions"
           }
         },
+        //[1]
         {
-          "insurance_plan": {
+          "insurance_plan":
+          {
             "uid": "premerabcbs-premeraheritagesignaturehix",
             "name": "Premera Heritage Signature - HIX",
-            "category": [
+            "category":
+            [
               "medical"
             ]
-          },
-          "insurance_provider": {
+        },
+          //[2]
+          "insurance_provider":
+          {
             "uid": "premerabluecrossblueshield",
             "name": "BCBS"
           }
         },
+        //[3]
         {
-          "insurance_plan": {
+          "insurance_plan":
+          {
             "uid": "premerabcbs-lifewiseconnecthix",
             "name": "LifeWise Connect - HIX",
-            "category": [
+            "category":
+            [
               "medical"
             ]
           },
-          "insurance_provider": {
+          //[4]
+          "insurance_provider":
+          {
             "uid": "premerabluecrossblueshield",
             "name": "BCBS"
           }
         },
+        //[5]
         {
-          "insurance_plan": {
+          "insurance_plan":
+          {
             "uid": "medicare-medicare",
             "name": "Medicare",
-            "category": [
+            "category":
+            [
               "medical"
             ]
           },
-          "insurance_provider": {
+          //[6]
+          "insurance_provider":
+          {
             "uid": "medicare",
             "name": "Medicare"
           }
         },
+        //[7]
         {
-          "insurance_plan": {
+          "insurance_plan":
+          {
             "uid": "aetna-aetnamdbronzesilverandgoldhmo",
             "name": "MD Bronze Silver  Gold - HMO",
-            "category": [
+            "category":
+            [
               "medical"
             ]
           },
-          "insurance_provider": {
+          //[8]
+          "insurance_provider":
+          {
             "uid": "aetna",
             "name": "Aetna"
           }
         }
       ],
-      "specialties": [
+      //Specialties sub catagory is an array with 1 possition
+      "specialties":
+      [
         {
           "uid": "plastic-surgery-specialist",
           "name": "Plastic Surgery",
@@ -168,7 +198,9 @@
           "actors": "Plastic Surgeons"
         }
       ],
-      "licenses": [
+      //Final sub category licenses is an array with potentially multuple index
+      "licenses":
+      [
         {
           "number": "MD00027070",
           "state": "WA"
@@ -177,7 +209,7 @@
       "uid": "f3496beafd0ce68656c8fc848c8fcb4b",
       "npi": "1437170461"
     },
-
+    //End of the first array within data, start of the second array.
     {
       "practices": [
         {
