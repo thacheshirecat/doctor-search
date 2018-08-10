@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Doc Search</title>
+  </head>
+  <body>
+
+    <p id="error-field"></p>
+
+    <div class="container">
+      <div id="main-page">
+        <p id="api-key"></p>
+        <h1>Welcome To Doc Search</h1>
+        <h4>Search By:</h4>
+        <button id="symptom-search-start">Symptoms</button>
+        <button id="doctor-search-start">Doctor Name</button>
+      </div>
+
+      <div id="symptom-search">
+        <form class="form-group" id="symptom-form">
+          <label for="symptom-input">Please enter your medical issue.</label>
+          <input id="symptom-input" class="form-control" />
+          <button class="btn btn-info" type="submit">Search</button>
+        </form>
+      </div>
+
+      <div id="doctor-search">
+        <form class="form-group" id="doctor-form">
+          <label for="doctor-input">Search Doctor By Name:</label>
+          <input id="doctor-input" class="form-control" />
+          <button class="btn btn-info" type="submit">Search</button>
+        </form>
+      </div>
+
+      <div id="search-results">
+        <p>Results:<span id="text-results"></span></p>
+      </div>
+    </div>
+
+
+  </body>
+</html>
