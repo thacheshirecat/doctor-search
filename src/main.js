@@ -53,7 +53,7 @@ $(document).ready(function()
     promise.then(function(response)
     {
       let doctors = JSON.parse(response);
-      $("#text-results").text(response);
+      $("#text-results").html(`${response.profile}`);
     }, function(error)
     {
       $('#error-field').text(`There was an error, message reads: ${error.message}`);
