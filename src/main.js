@@ -1,3 +1,4 @@
+import { NameSearch, SymptomSearch } from './doctor-search.js';
 import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -5,97 +6,81 @@ import './styles.css';
 
 $(document).ready(function()
 {
+  //Fields initially hidden
   $("#search-results").hide();
   $("#symptom-search").hide();
   $("#doctor-search").hide();
-
+  //Navigate to search by Name
   $("button#doctor-search-start").click(function()
   {
     $("#main-page").hide();
     $("#doctor-search").show();
   });
-
+  //Navigate to search by symptom
   $("button#symptom-search-start").click(function()
   {
     $("#main-page").hide();
     $("#symptom-search").show();
   });
-
+  //Search by Name
   $("form#doctor-form").submit(function(event)
   {
     event.preventDefault();
 
-    $("#symptom-search").hide();
     $("#search-results").show();
 
     let name = $("#doctor-input").val();
     $("#doctor-input").val("");
 
-
-    let promise = new Promise(function(resolve, reject)
-    {
-      let request = new XMLHttpRequest();
-      let url = `https://api.betterdoctor.com/2016-03-01/doctors?name=${name}&location=wa-seattle&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=` + process.env.exports.apiKey;
-      request.onload = function()
-      {
-        if(this.status === 200)
-        {
-          resolve(request.response);
-        }
-        else
-        {
-          reject(Error(request.statusText));
-        }
-      }
-      request.open("GET", url, true);
-      request.send();
-    });
+    let promise = NameSearch(name);
     promise.then(function(response)
     {
       let doctors = JSON.parse(response);
-      $("#text-results").html(`${response.profile}`);
+      doctors.data.forEach(function(doctor)
+      {
+        $("#search-results").append(`___
+          <ul>
+          <li>Name: ${doctor.profile.first_name} ${doctor.profile.last_name}</li>
+          <li>Address: <p>${doctor.practices[0].visit_address.street}</p>
+          <p>${doctor.practices[0].visit_address.city}, ${doctor.practices[0].visit_address.state} ${doctor.practices[0].visit_address.zip}</p></li>
+        <li>Phone Number: ${doctor.practices[0].phones[0].number}</li>
+        <li>Website: ${doctor.practices[0].website}</li>
+        <li>Doctor accepting new patients? ${doctor.practices[0].accepts_new_patients}</li>`)
+      });
+    },
+    function(error)
+    {
+      $('#error-field').text(`There was an error, message reads: ${error.message}`);
+    });
+  });
+  //Search by Symptom
+  $("form#symptom-form").submit(function(event)
+  {
+    event.preventDefault();
+
+    $("#search-results").show();
+
+    let symptom = $("#symptom-input").val();
+    $("#symptom-input").val("");
+
+    let promise = SymptomSearch(symptom);
+    promise.then(function(response)
+    {
+      let symptom = JSON.parse(response);
+      symptom.data.forEach(function(doctor)
+      {
+        $("#search-results").append(`___
+          <ul>
+          <li>Name: ${doctor.profile.first_name} ${doctor.profile.last_name}</li>
+          <li>Address: <p>${doctor.practices[0].visit_address.street}</p>
+          <p>${doctor.practices[0].visit_address.city}, ${doctor.practices[0].visit_address.state} ${doctor.practices[0].visit_address.zip}</p></li>
+        <li>Phone Number: ${doctor.practices[0].phones[0].number}</li>
+        <li>Website: ${doctor.practices[0].website}</li>
+        <li>Doctor accepting new patients? ${doctor.practices[0].accepts_new_patients}</li>`)
+      });
     }, function(error)
     {
       $('#error-field').text(`There was an error, message reads: ${error.message}`);
     });
   });
-
-  // $("form#symptom-form").submit(function(event)
-  // {
-  //   event.preventDefault();
-  //
-  //   $("#symptom-search").hide();
-  //   $("#search-results").show();
-  //
-  //   let promise = new Promise(function(resolve, reject)
-  //   {
-  //     let request = new XMLHttpRequest();
-  //     let url = ``;
-  //     request.onload = function()
-  //     {
-  //       if(this.status === 200)
-  //       {
-  //         resolve(request.response);
-  //       }
-  //       else
-  //       {
-  //         reject(Error(request.statusText));
-  //       }
-  //     }
-  //     request.open("GET", url, true);
-  //     request.send();
-  //   });
-  //   promise.then(function(response)
-  //   {
-  //     let doctors = JSON.parse(response);
-  //   }, function(error)
-  //   {
-  //     $('#error-field').text(`There was an error, message reads: ${error.message}`);
-  //   });
-  // });
-// });
-
-
-
-
 });
